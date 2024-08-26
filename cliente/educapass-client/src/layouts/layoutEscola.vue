@@ -1,11 +1,11 @@
 <template>
     <v-app-bar
-        color="indigo-darken-4"
+        color="light-blue-darken-4"
         prominent
     >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Educapass - Escola</v-toolbar-title>
+        <v-toolbar-title class="font-new">Educapass - Escola</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -19,13 +19,14 @@
         :location="$vuetify.display.mobile ? 'bottom' : undefined"
         temporary
     >
-    <v-list density="compact" nav>
+    <v-list density="compact" nav class="font-new">
+      <img style="width: 32px;" src="@/assets/logoEducapass.png"/>
         <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" :to="{ path: 'Dashboard' }"></v-list-item>
         <v-list-item prepend-icon="mdi-account-school" title="Alunos" :to="{ path: 'AlunosEscola' }"></v-list-item>
-        <v-list-item prepend-icon="mdi-human-male-board" title="Professores" value="shared"></v-list-item>
-        <v-list-item prepend-icon="mdi-book-open-page-variant" title="Materias" value="starred"></v-list-item>
-        <v-list-item prepend-icon="mdi-table-chair" title="Salas" value="starred"></v-list-item>
-        <v-list-item prepend-icon="mdi-video-vintage" title="Aulas online" value="starred"></v-list-item>
+        <v-list-item prepend-icon="mdi-human-male-board" title="Professores" :to="{ path: 'ProfessorEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-door-closed" title="Salas" :to="{ path: 'SalasEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-book-open-page-variant" title="Materias" :to="{ path: 'MateriasEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-video-vintage" title="Aulas online" :to="{ path: 'AulasEscola' }"></v-list-item>
     </v-list>
         
     </v-navigation-drawer>
