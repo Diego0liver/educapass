@@ -17,6 +17,7 @@ builder.Services.AddDbContext<BancoContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEscolaRepository, EscolaRepository>();
+builder.Services.AddTransient<IClaseRepository, ClaseRepository>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -34,6 +35,14 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(chaveKey))
     };
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("cors", app => {
+        app.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +54,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("cors");
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|c:\\users\\diego\\documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\controllers\\escolacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|solutionrelative:educapass-api\\controllers\\escolacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|c:\\users\\diego\\documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\controllers\\clasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|solutionrelative:educapass-api\\controllers\\clasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|c:\\users\\diego\\documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\repository\\escolarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|solutionrelative:educapass-api\\repository\\escolarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|c:\\users\\diego\\documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\repository\\iclaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|solutionrelative:educapass-api\\repository\\iclaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|c:\\users\\diego\\documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\repository\\claserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|solutionrelative:educapass-api\\repository\\claserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|c:\\users\\diego\\documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\models\\clasemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}|educapass-api\\educapass-api.csproj|solutionrelative:educapass-api\\models\\clasemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +26,55 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClaseModel.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Models\\ClaseModel.cs",
+              "RelativeDocumentMoniker": "educapass-api\\Models\\ClaseModel.cs",
+              "ToolTip": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Models\\ClaseModel.cs",
+              "RelativeToolTip": "educapass-api\\Models\\ClaseModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAYwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T18:38:47.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClaseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Repository\\ClaseRepository.cs",
+              "RelativeDocumentMoniker": "educapass-api\\Repository\\ClaseRepository.cs",
+              "ToolTip": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Repository\\ClaseRepository.cs",
+              "RelativeToolTip": "educapass-api\\Repository\\ClaseRepository.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAywBkAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T18:37:59.77Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "EscolaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Repository\\EscolaRepository.cs",
-              "RelativeDocumentMoniker": "educapass-api\\Repository\\EscolaRepository.cs",
-              "ToolTip": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Repository\\EscolaRepository.cs",
-              "RelativeToolTip": "educapass-api\\Repository\\EscolaRepository.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBcAAAAAAAAAAAAAAA==",
+              "Title": "IClaseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Repository\\IClaseRepository.cs",
+              "RelativeDocumentMoniker": "educapass-api\\Repository\\IClaseRepository.cs",
+              "ToolTip": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Repository\\IClaseRepository.cs",
+              "RelativeToolTip": "educapass-api\\Repository\\IClaseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-29T15:19:27.662Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-29T18:34:30.936Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EscolaController.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Controllers\\EscolaController.cs",
-              "RelativeDocumentMoniker": "educapass-api\\Controllers\\EscolaController.cs",
-              "ToolTip": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Controllers\\EscolaController.cs",
-              "RelativeToolTip": "educapass-api\\Controllers\\EscolaController.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAmwFcAAABHAAAAAAAAAA==",
+              "Title": "ClaseController.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Controllers\\ClaseController.cs",
+              "RelativeDocumentMoniker": "educapass-api\\Controllers\\ClaseController.cs",
+              "ToolTip": "C:\\Users\\diego\\Documents\\projetos\\educapass\\servidor\\educapass-api\\educapass-api\\Controllers\\ClaseController.cs",
+              "RelativeToolTip": "educapass-api\\Controllers\\ClaseController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAiwCEAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-29T14:23:59.346Z",
+              "WhenOpened": "2024-08-29T18:28:18.259Z",
               "EditorCaption": ""
             }
           ]

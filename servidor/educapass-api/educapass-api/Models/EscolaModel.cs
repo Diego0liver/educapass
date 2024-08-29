@@ -14,6 +14,7 @@ namespace educapass_api.Models
         public string? Cep { get; set; }
         public string? Logo { get; set; }
         //public int? Plano_id { get; set; }
+        public ICollection<ClaseModel> Clase { get; set; }
         public bool SenhaValida(string senha)
         {
             return Senha == senha;

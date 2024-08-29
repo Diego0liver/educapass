@@ -13,7 +13,7 @@
       <div class="text-center">
         <div class="text-body-2 font-weight-light mb-n1"></div>
 
-        <h1 class="text-h2 font-weight-bold font-new">Educapass</h1>
+        <h1 class="text-h2 font-weight-bold font-new">{{ escolaID }}</h1>
       </div>
 
       <div class="py-4" />
@@ -23,7 +23,14 @@
 </template>
 
 <script setup>
-  //
+import axios from 'axios';
+import { ref } from 'vue';
+
+const escolaID = ref()
+axios.get('escola/1').then((res)=>{
+  escolaID.value = res.data.res.nome
+  console.log(res.data.res);
+})
 </script>
 
 <style scoped>

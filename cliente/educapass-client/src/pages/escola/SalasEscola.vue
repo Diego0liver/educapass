@@ -28,6 +28,7 @@
               color="primary"
               dark
               v-bind="props"
+              :to="{ path: 'sala/NovaSala' }"
             >
               + Nova sala
             </v-btn>
@@ -154,115 +155,106 @@
  </template>
  
  <script>
- import LayoutEscola from '@/layouts/layoutEscola.vue';
-     export default{
-         components: {
+  import LayoutEscola from '@/layouts/layoutEscola.vue';
+  import axios from 'axios';
+  
+  export default{
+    components: {
              LayoutEscola
          },
-         data: () => ({
+    data: () => ({
       dialog: false,
       dialogDelete: false,
       headers: [
-        { title: 'Sala', key: 'sala' },
+        { title: 'Sala', key: 'nome' },
         { title: 'Descricao', key: 'descricao' },
         { title: 'Opcoes', key: 'actions', sortable: false },
       ],
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        sala: '',
+        nome: '',
         descricao: '',
-       
       },
       defaultItem: {
-        sala: '',
+        nome: '',
         descricao: '',
-        
       },
     }),
 
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
+  computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
+  },
+
+  watch: {
+    dialog (val) {
+      val || this.close()
+    },
+    dialogDelete (val) {
+      val || this.closeDelete()
+    },
+  },
+
+  created () {
+    this.initialize()
+  },
+  methods: {
+    initialize () {
+      axios.get('clases')
+      .then(response => {
+        this.desserts = response.data;
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.error("Erro ao buscar os dados:", error);
+      });
+      
     },
 
-    watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
-      },
+    editItem (item) {
+      this.editedIndex = this.desserts.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
     },
 
-    created () {
-      this.initialize()
+    deleteItem (item) {
+      this.editedIndex = this.desserts.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialogDelete = true
     },
 
-    methods: {
-      initialize () {
-        this.desserts = [
-         
-          {
-            sala: '1 - A',
-           
-            descricao: 'Corredor 2',
-        
-           
-          },
-          {
-            sala: '9 - E',
-          
-            descricao: 'Corredor 1',
-          
-            
-          },
-        ]
-      },
-
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-
-      deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
-        this.closeDelete()
-      },
-
-      close () {
-        this.dialog = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
-      },
+    deleteItemConfirm () {
+      this.desserts.splice(this.editedIndex, 1)
+      this.closeDelete()
     },
+
+    close () {
+      this.dialog = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+
+    closeDelete () {
+      this.dialogDelete = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+
+    save () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+      } else {
+        this.desserts.push(this.editedItem)
+      }
+      this.close()
+    },
+  },
   
-     }
- </script>
+}
+</script>

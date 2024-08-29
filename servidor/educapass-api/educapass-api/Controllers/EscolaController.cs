@@ -29,7 +29,6 @@ namespace educapass_api.Controllers
         }
 
         // GET api/<EscolaController>/5
-        [Authorize]
         [HttpGet("{id}")]
         public IActionResult EscolaById(int id)
         {
