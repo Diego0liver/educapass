@@ -21,12 +21,12 @@
     >
     <v-list density="compact" nav class="font-new">
       <img style="width: 32px;" src="@/assets/logoEducapass.png"/>
-        <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" :to="{ path: 'Dashboard' }"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-school" title="Alunos" :to="{ path: 'AlunosEscola' }"></v-list-item>
-        <v-list-item prepend-icon="mdi-human-male-board" title="Professores" :to="{ path: 'ProfessorEscola' }"></v-list-item>
-        <v-list-item prepend-icon="mdi-door-closed" title="Salas" :to="{ path: 'SalasEscola' }"></v-list-item>
-        <v-list-item prepend-icon="mdi-book-open-page-variant" title="Materias" :to="{ path: 'MateriasEscola' }"></v-list-item>
-        <v-list-item prepend-icon="mdi-video-vintage" title="Aulas online" :to="{ path: 'AulasEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" :to="{ path: '/escola/Dashboard' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-account-school" title="Alunos" :to="{ path: '/escola/AlunosEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-human-male-board" title="Professores" :to="{ path: '/escola/ProfessorEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-door-closed" title="Salas" :to="{ path: '/escola/SalasEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-book-open-page-variant" title="Materias" :to="{ path: '/escola/MateriasEscola' }"></v-list-item>
+        <v-list-item prepend-icon="mdi-video-vintage" title="Aulas online" :to="{ path: '/escola/AulasEscola' }"></v-list-item>
     </v-list>
         
     </v-navigation-drawer>

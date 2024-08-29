@@ -1,0 +1,63 @@
+name: dockercompose4469552575160079979
+services:
+  dbeducapass:
+    container_name: db_educapass
+    environment:
+      POSTGRES_PASSWORD: root
+    image: postgres
+    networks:
+      educapassnet: null
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5432"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: pg
+        target: /var/lib/postgresql/data
+        volume: {}
+  educapass-api:
+    build:
+      context: C:\Users\diego\Documents\projetos\educapass\servidor\educapass-api
+      dockerfile: educapass-api/Dockerfile
+    depends_on:
+      dbeducapass:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+    image: educapassapi
+    networks:
+      educapassnet: null
+    ports:
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\diego\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\diego\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  educapassnet:
+    name: dockercompose4469552575160079979_educapassnet
+    driver: bridge
+volumes:
+  pg:
+    name: dockercompose4469552575160079979_pg
+    driver: local

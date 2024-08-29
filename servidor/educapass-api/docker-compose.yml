@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  educapass-api:
+    image: ${DOCKER_REGISTRY-}educapassapi
+    build:
+      context: .
+      dockerfile: educapass-api/Dockerfile
+    depends_on:
+        - dbeducapass
+    networks:
+        - educapassnet
+  
+  dbeducapass:
+    image: postgres
+    container_name: db_educapass
+    restart: always
+    volumes:
+      - 'pg:/var/lib/postgresql/data'
+    ports:
+        - "5432:5432"
+    networks:
+        - educapassnet
+    environment:
+      POSTGRES_PASSWORD: root
+  
+networks:
+  educapassnet:
+      driver: bridge
+
+volumes:
+  pg:
+    driver: local

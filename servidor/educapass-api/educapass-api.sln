@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "educapass-api", "educapass-api\educapass-api.csproj", "{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{38206EEB-C656-4F60-B1C1-22369C89401B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E1E7346-3826-4B5B-B9CA-B8BB2EE87B8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38206EEB-C656-4F60-B1C1-22369C89401B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38206EEB-C656-4F60-B1C1-22369C89401B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38206EEB-C656-4F60-B1C1-22369C89401B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38206EEB-C656-4F60-B1C1-22369C89401B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0D4B024-A73C-4091-8C61-DD38B3E0DA66}
+	EndGlobalSection
+EndGlobal
