@@ -18,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEscolaRepository, EscolaRepository>();
 builder.Services.AddTransient<IClaseRepository, ClaseRepository>();
+builder.Services.AddTransient<IAlunoRepository, AlunoRepository>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

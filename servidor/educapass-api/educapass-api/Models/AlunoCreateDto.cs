@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace educapass_api.Models
 {
-    public class AlunoModel
+    public class AlunoCreateDto
     {
         [Key]
         public int Id { get; set; }
@@ -12,7 +12,7 @@ namespace educapass_api.Models
         public required string Email { get; set; }
         public required string Senha { get; set; }
         public string? Telefone { get; set; }
-        public string? Cpf { get; set; } 
+        public string? Cpf { get; set; }
         public DateTime? DataNascimento { get; set; }
         public string? Responsavel { get; set; }
         public string? ContatoResponsavel { get; set; }
@@ -20,8 +20,5 @@ namespace educapass_api.Models
         public int? TotalFalta { get; set; }
         public int Escola_id { get; set; }
         public int? Clase_id { get; set; }
-        [JsonIgnore]
-        public EscolaModel? Escola { get; set; }
-        public ClaseModel? Clase { get; set; }
     }
 }

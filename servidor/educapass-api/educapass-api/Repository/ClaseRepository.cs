@@ -30,7 +30,14 @@ namespace educapass_api.Repository
 
         public bool Deletar(int id)
         {
-            throw new NotImplementedException();
+            ClaseModel deletarClase = ClaseById(id);
+            if (deletarClase == null)
+            {
+                return false;
+            }
+            _bancoContext.Clase.Remove(deletarClase);
+            _bancoContext.SaveChanges();
+            return true;
         }
     }
 }

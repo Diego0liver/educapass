@@ -6,7 +6,7 @@
                 <v-row>
                     <v-col cols="12" md="4">
                         <v-text-field
-                            label="Nome"
+                            label="Nome *"
                             required
                             :rules="[v => !!v || 'Este campo é obrigatório']"
                         ></v-text-field>
@@ -18,21 +18,23 @@
                     </v-col>
                     <v-col cols="12" md="4">
                         <v-text-field
-                            label="E-mail"
+                            label="E-mail *"
                             type="E-mail"
                             required
                             :rules="[v => !!v || 'Este campo é obrigatório']"
                         ></v-text-field>
                     </v-col>    
                 </v-row>
-
                 <v-row>
+                    <v-col cols="12" md="4">
+                        <v-text-field
+                            label="Telefone *"
+                        ></v-text-field>
+                    </v-col>    
                     <v-col cols="12" md="4">
                         <v-text-field 
                             label="Data nascimento"
                             type="date"
-                            required
-                            :rules="[v => !!v || 'Este campo é obrigatório']"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
@@ -40,48 +42,37 @@
                             label="Numero chamada"
                         ></v-text-field>
                     </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="12" md="4">
+                        <v-text-field
+                            label="Nome do responsavel"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                        <v-text-field
+                            label="Contato do responsavel"
+                        ></v-text-field>
+                    </v-col>
                     <v-col cols="12" md="4">
                         <v-text-field disabled
                             label="Numero de inscricao (Gerado altomatico)"
                         ></v-text-field>
-                    </v-col>    
+                    </v-col>   
                 </v-row>
-
                 <v-row>
                     <v-col cols="12" md="3">
-                        <v-text-field
-                            label="Nome do pai"
-                        ></v-text-field>
+                        <v-select :item-props="salaProps" :items="items" label="Sala de aula"></v-select>
                     </v-col>
                     <v-col cols="12" md="3">
                         <v-text-field
-                            label="Contato do pai"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="3">
-                        <v-text-field
-                            label="Nome da mae"
-                             type="E-mail"
-                        ></v-text-field>
-                    </v-col>  
-                    <v-col cols="12" md="3">
-                        <v-text-field
-                            label="Contato mae"
-                             type="E-mail"
-                        ></v-text-field>
-                    </v-col>    
-                </v-row>
-
-                <v-row>
-                    <v-col cols="12" md="3">
-                        <v-text-field
-                            label="Faltas"
+                            label="Total de faltas"
                             type="number"
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="9">
+                    <v-col cols="12" md="6">
                         <v-text-field
-                            label="Senha"
+                            label="Senha* (Senha para o painel do aluno)"
                             type="password"
                             required
                             :rules="[v => !!v || 'Este campo é obrigatório']"
@@ -98,13 +89,37 @@
         </v-container>            
     </LayoutEscola>    
 </template>
-  
 
 <script>
     import LayoutEscola from '@/layouts/layoutEscola.vue';
-        export default{
-            components: {
-                LayoutEscola
-            }
-        }     
+    import axios from 'axios';
+
+    export default{
+        components: {
+            LayoutEscola
+        },
+        data: () => ({
+            items: ''
+        }),
+        created(){
+            this.fetchSala();
+        },
+        methods: {
+            async fetchSala() {
+                try {
+                    const response = await axios.get('clases');
+                    console.log(response.data); 
+                    this.items = response.data;
+                } catch (error) {
+                    console.error('Erro ao buscar clase:', error);
+                }
+            },
+            salaProps (items) {
+                return {
+                    title: items.nome,
+                    subtitle: items.descricao
+                }
+            },
+        }
+    }
 </script>      

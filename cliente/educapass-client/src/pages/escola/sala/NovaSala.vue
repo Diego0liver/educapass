@@ -6,7 +6,7 @@
                 <v-row>
                     <v-col cols="12" md="6">
                         <v-text-field
-                            label="Sala"
+                            label="Sala de aula *"
                             required
                             v-model="nome"
                             :rules="[v => !!v || 'Este campo é obrigatório']"
@@ -15,7 +15,7 @@
                     <v-col cols="12" md="6">
                         <v-text-field
                             v-model="descricao"
-                            label="Descricao"
+                            label="Descriçäo (Opcional)"
                         ></v-text-field>
                     </v-col>
                 </v-row>
@@ -29,7 +29,6 @@
         </v-container>            
     </LayoutEscola>    
 </template>
-  
 
 <script>
     import LayoutEscola from '@/layouts/layoutEscola.vue';
@@ -56,7 +55,7 @@
                 
                 axios.post('clases', novaSalas, {
                     headers: {
-                    'Content-Type': 'application/json' // Certifique-se de que o servidor espera JSON
+                    'Content-Type': 'application/json'
                     }
                 })
                 .then(response => {
@@ -64,8 +63,8 @@
                     this.$router.push('/escola/SalasEscola');
                 })
                 .catch(error => {
-                    console.error('Erro ao salvar a sala:', error.response ? error.response.data : error.message);
-                    // Adicione lógica aqui para lidar com o erro, como mostrar uma mensagem de erro para o usuário
+                    console.error('Erro ao salvar a sala:', error.message);
+                    this.$router.push('/escola/NovaSala');
                 });
             }
         }

@@ -10,6 +10,7 @@ namespace educapass_api.Db
         }
         public DbSet<EscolaModel> Escola { get; set; }
         public DbSet<ClaseModel> Clase { get; set; }
+        public DbSet<AlunoModel> Aluno { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -18,6 +19,16 @@ namespace educapass_api.Db
                 .HasOne(t => t.Escola)
                 .WithMany(u => u.Clase)
                 .HasForeignKey(t => t.Escola_id);
+
+            modelBuilder.Entity<AlunoModel>()
+                .HasOne(t => t.Escola)
+                .WithMany(u => u.Aluno)
+                .HasForeignKey(t => t.Escola_id);
+
+            modelBuilder.Entity<AlunoModel>()
+                .HasOne(t => t.Clase)
+                .WithMany(u => u.Aluno)
+                .HasForeignKey(t => t.Clase_id);
         }
     }
 }

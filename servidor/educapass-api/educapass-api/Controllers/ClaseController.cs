@@ -37,5 +37,16 @@ namespace educapass_api.Controllers
 
             return Ok(clasesAll);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteClases(int id)
+        {
+            bool res = _claseRepository.Deletar(id);
+            if (!res)
+            {
+                return NotFound(new { message = "Clase não encontrada." });
+            }
+            return Ok(new { message = "Clase deletada com sucesso.", res });
+        }
     }
 }
