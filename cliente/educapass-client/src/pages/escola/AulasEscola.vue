@@ -204,7 +204,6 @@
     methods: {
       initialize () {
         this.desserts = [
-         
           {
             titulo: 'Donut',
             materia: '20/95',

@@ -20,12 +20,12 @@ namespace educapass_api.Repository
 
         public AlunoModel AlunoById(int id)
         {
-            return _bancoContext.Aluno.FirstOrDefault(x => x.Id == id);
+            return _bancoContext.Aluno.Include(t => t.Clase).FirstOrDefault(x => x.Id == id);
         }
 
-        public List<AlunoModel> GetAlunos()
+        public List<AlunoModel> GetAlunos(int userId)
         {
-            return _bancoContext.Aluno.Include(t => t.Clase).ToList();
+            return _bancoContext.Aluno.Where(a => a.Escola_id == userId).Include(t => t.Clase).ToList();
         }
 
         public bool Deletar(int id)

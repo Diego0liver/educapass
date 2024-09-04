@@ -1,17 +1,98 @@
-/**
- * router/index.ts
- *
- * Automatic routes for `./src/pages/*.vue`
- */
 
-// Composables
+
 import { createRouter, createWebHistory } from 'vue-router/auto'
-import { setupLayouts } from 'virtual:generated-layouts'
-import { routes } from 'vue-router/auto-routes'
+import Auth from '../service/middleware.js';
+import Index from '@/pages/index.vue';
+import Dashboard from '@/pages/escola/Dashboard.vue';
+import AlunosEscola from '@/pages/escola/AlunosEscola.vue';
+import ProfessorEscola from '@/pages/escola/ProfessorEscola.vue';
+import SalasEscola from '@/pages/escola/SalasEscola.vue';
+import MateriasEscola from '@/pages/escola/MateriasEscola.vue';
+import AulasEscola from '@/pages/escola/AulasEscola.vue';
+import NovaSala from '@/pages/escola/sala/NovaSala.vue';
+import NovoAluno from '@/pages/escola/aluno/NovoAluno.vue';
+import DetalhesAluno from '@/pages/escola/aluno/DetalhesAluno.vue';
+import NotFound from '@/pages/NotFound.vue';
+import NovoProfessor from '@/pages/escola/professor/NovoProfessor.vue';
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Index,
+    beforeEnter: Auth.authEscolaViewLogin
+  },
+  {
+    path: '/escola',
+    name: 'EscolaHome',
+    component: Dashboard,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/alunos',
+    name: 'AlunosEscola',
+    component: AlunosEscola,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/professores',
+    name: 'ProfessorEscola',
+    component: ProfessorEscola,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/salas',
+    name: 'SalasEscola',
+    component: SalasEscola,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/materias',
+    name: 'MateriasEscola',
+    component: MateriasEscola,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/aulas',
+    name: 'AulasEscola',
+    component: AulasEscola,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/novaSala',
+    name: 'NovaSala',
+    component: NovaSala,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/novoAluno',
+    name: 'NovoAluno',
+    component: NovoAluno,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/detalhesAluno/:id',
+    name: 'DetalhesAluno',
+    component: DetalhesAluno,
+    beforeEnter: Auth.authEscola,
+    props: true
+  },
+  {
+    path: '/escola/novoProfessor',
+    name: 'NovoProfessor',
+    component: NovoProfessor,
+    beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: setupLayouts(routes),
+  routes,
 })
 
 // Workaround for https://github.com/vitejs/vite/issues/11804

@@ -4,7 +4,7 @@ namespace educapass_api.Repository
 {
     public interface IAlunoRepository
     {
-        List<AlunoModel> GetAlunos();
+        List<AlunoModel> GetAlunos(int userId);
         AlunoModel AlunoById(int id);
         AlunoModel Adicionar(AlunoModel aluno);
         bool Deletar(int id);

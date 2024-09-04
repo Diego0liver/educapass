@@ -1,8 +1,8 @@
 ﻿using educapass_api.Models;
 using educapass_api.Repository;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace educapass_api.Controllers
 {
@@ -15,6 +15,8 @@ namespace educapass_api.Controllers
         {
             _alunoRepository = alunoRepository;
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult PostAluno([FromBody] AlunoCreateDto createDto)
         {
@@ -50,14 +52,7 @@ namespace educapass_api.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult GetAlunos()
-        {
-            var alunosAll = _alunoRepository.GetAlunos();
-
-            return Ok(alunosAll);
-        }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteAluno(int id)
         {
@@ -67,6 +62,36 @@ namespace educapass_api.Controllers
                 return NotFound(new { message = "Aluno não encontrada." });
             }
             return Ok(new { message = "Aluno deletada com sucesso.", res });
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult AlunoById(int id)
+        {
+            var res = _alunoRepository.AlunoById(id);
+            if (res != null)
+            {
+                return Ok(new { message = "Aluno econtrada.", res });
+            }
+            return StatusCode(500, new { message = "Aluno nao encontrada" });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAlunos()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            
+            if (userIdClaim == null)
+            {
+                return Unauthorized($"Token inválido ou não contém o claim necessário.");
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+
+            var alunosAll = _alunoRepository.GetAlunos(userId);
+
+            return Ok(alunosAll);
         }
     }
 }

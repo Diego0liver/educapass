@@ -22,7 +22,7 @@
                 <v-btn class="me-4" color="light-blue-darken-3" type="submit">
                     Salvar
                 </v-btn>
-                <v-btn :to="{ path: '/escola/SalasEscola' }">
+                <v-btn :to="{ name: 'SalasEscola' }">
                     Voltar
                 </v-btn>
             </form>
@@ -33,24 +33,30 @@
 <script>
     import LayoutEscola from '@/layouts/layoutEscola.vue';
     import axios from 'axios';
+    import jwt_decode from 'jwt-decode';
+    import Cookies from 'js-cookie';
 
-        export default{
-            components: {
-                LayoutEscola
-            },
+    export default{
+        components: {
+            LayoutEscola
+        },
         data(){
             return {
-            nome: '',
-            descricao: '',
-            escola_id: 1
-        }
+                nome: '',
+                descricao: '',
+                escola_id: null,
+                token: '',
+                decodedToken: ''
+            }
         },
         methods: {
             novaSala(){
+                this.token = Cookies.get('escola_token');
+                this.decodedToken = jwt_decode(this.token);
                 const novaSalas = {
                     nome : this.nome,
                     descricao : this.descricao,
-                    escola_id : this.escola_id
+                    escola_id : parseInt(this.decodedToken.sub, 10)
                 };
                 
                 axios.post('clases', novaSalas, {
@@ -60,7 +66,7 @@
                 })
                 .then(response => {
                     console.log('Sala salva com sucesso:', response.data);
-                    this.$router.push('/escola/SalasEscola');
+                    this.$router.push('/escola/salas');
                 })
                 .catch(error => {
                     console.error('Erro ao salvar a sala:', error.message);
@@ -68,5 +74,5 @@
                 });
             }
         }
-        }
+    }
 </script>      

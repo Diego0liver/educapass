@@ -1,7 +1,9 @@
 ﻿using educapass_api.Models;
 using educapass_api.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace educapass_api.Controllers
 {
@@ -15,6 +17,7 @@ namespace educapass_api.Controllers
             _claseRepository = claseRepository;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult PostClase(ClaseModel clase)
         {
@@ -30,14 +33,24 @@ namespace educapass_api.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetClases()
         {
-            var clasesAll = _claseRepository.GetClases();
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized($"Token inválido ou não contém o claim necessário.");
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+            var clasesAll = _claseRepository.GetClases(userId);
 
             return Ok(clasesAll);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteClases(int id)
         {

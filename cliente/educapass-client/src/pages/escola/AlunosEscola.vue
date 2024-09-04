@@ -12,7 +12,7 @@
             class="mb-2"
             color="primary"
             dark
-            :to="{ path: 'aluno/NovoAluno' }">
+            :to="{ name: 'NovoAluno' }">
             + Novo Aluno
           </v-btn>
           <v-dialog v-model="dialogDelete" max-width="500px">
@@ -32,7 +32,7 @@
         <v-icon
           class="me-2"
           size="small"
-          @click="editItem(item)"
+          @click="detalheAluno(item.id)"
         >
           mdi-eye
         </v-icon>
@@ -57,49 +57,34 @@
 
 <script>
   import LayoutEscola from '@/layouts/layoutEscola.vue';
+  import axios from 'axios';
+  import Cookies from 'js-cookie';
+
   export default{
     components: {
       LayoutEscola
     },
     data: () => ({
-      dialog: false,
       dialogDelete: false,
       headers: [
         { title: 'Nome', key: 'nome' },
         { title: 'Inscricao', key: 'inscricao' },
-        { title: 'Data', key: 'data' },
-        { title: 'Turma', key: 'turma' },
-        { title: 'Numero chamada', key: 'numero' },
+        { title: 'Turma', key: 'clase.nome' },
+        { title: 'Numero chamada', key: 'numeroChamada' },
         { title: 'Opcoes', key: 'actions', sortable: false },
       ],
       dados: [],
       editedIndex: -1,
-      editedItem: {
-        nome: '',
-        inscricao: 0,
-        data: '',
-        turma: '',
-        numero: 0,
-      },
       defaultItem: {
         nome: '',
         inscricao: 0,
-        data: '',
         turma: '',
-        numero: 0,
+        numeroChamada: 0,
+        token: ''
       },
     }),
 
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
-    },
-
     watch: {
-      dialog (val) {
-        val || this.close()
-      },
       dialogDelete (val) {
         val || this.closeDelete()
       },
@@ -108,25 +93,25 @@
     created () {
       this.initialize()
     },
-
     methods: {
       initialize () {
-        this.dados = [
-          {
-            nome: 'Donut',
-            inscricao: 452,
-            data: '20/95',
-            turma: '8 - A',
-            numero: 4,
-          },
-          {
-            nome: 'KitKat',
-            inscricao: 518,
-            data: '20/20',
-            turma: '0 - B',
-            numero: 7,
-          },
-        ]
+        this.token = Cookies.get('escola_token')
+        axios.get('alunos', {
+          headers: {
+            'Authorization': `Bearer ${this.token}`,
+          }
+        })
+        .then(response => {
+          this.dados = response.data;
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.error("Erro ao buscar os dados:", error);
+          console.log(this.token)
+        });
+      },
+      detalheAluno(id) {
+        this.$router.push({ name: 'DetalhesAluno', params: { id } });
       },
 
       deleteItem (item) {
@@ -147,6 +132,6 @@
           this.editedIndex = -1
         })
       },
-    },
+    },  
   }
- </script>
+</script>

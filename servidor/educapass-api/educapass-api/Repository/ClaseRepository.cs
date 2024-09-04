@@ -23,9 +23,9 @@ namespace educapass_api.Repository
             return _bancoContext.Clase.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<ClaseModel> GetClases()
+        public List<ClaseModel> GetClases(int userId)
         {
-            return _bancoContext.Clase.ToList();
+            return _bancoContext.Clase.Where(a => a.Escola_id == userId).ToList();
         }
 
         public bool Deletar(int id)

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("educapass-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20d7f382e880043c127c07accec05a259f0832f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e15efa0a345893d1f13f3a52608b0416e8c4a07e")]
 [assembly: System.Reflection.AssemblyProductAttribute("educapass-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("educapass-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

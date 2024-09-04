@@ -12,7 +12,7 @@
             class="mb-2"
             color="primary"
             dark
-            :to="{ path: 'sala/NovaSala' }">
+            :to="{ name: 'NovaSala' }">
             + Nova sala
           </v-btn>
           <v-dialog v-model="dialogDelete" max-width="500px">
@@ -69,11 +69,6 @@
       ],
       dados: [],
       editedIndex: -1,
-      editedItem: {
-        nome: '',
-        descricao: '',
-        id: ''
-      },
       defaultItem: {
         nome: '',
         descricao: '',

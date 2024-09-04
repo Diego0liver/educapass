@@ -1,5 +1,6 @@
 using educapass_api.Db;
 using educapass_api.Repository;
+using educapass_api.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -19,6 +20,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEscolaRepository, EscolaRepository>();
 builder.Services.AddTransient<IClaseRepository, ClaseRepository>();
 builder.Services.AddTransient<IAlunoRepository, AlunoRepository>();
+builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IProfessorRepository, ProfessorRepository>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

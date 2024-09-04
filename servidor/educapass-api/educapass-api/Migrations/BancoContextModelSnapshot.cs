@@ -39,8 +39,8 @@ namespace educapass_api.Migrations
                     b.Property<string>("Cpf")
                         .HasColumnType("text");
 
-                    b.Property<DateOnly?>("DataNascimento")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("DataNascimento")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -144,6 +144,46 @@ namespace educapass_api.Migrations
                     b.ToTable("Escola");
                 });
 
+            modelBuilder.Entity("educapass_api.Models.ProfessorModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Escola_id")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Inscricao")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Telefone")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Escola_id");
+
+                    b.ToTable("Professor");
+                });
+
             modelBuilder.Entity("educapass_api.Models.AlunoModel", b =>
                 {
                     b.HasOne("educapass_api.Models.ClaseModel", "Clase")
@@ -172,6 +212,17 @@ namespace educapass_api.Migrations
                     b.Navigation("Escola");
                 });
 
+            modelBuilder.Entity("educapass_api.Models.ProfessorModel", b =>
+                {
+                    b.HasOne("educapass_api.Models.EscolaModel", "Escola")
+                        .WithMany("Professor")
+                        .HasForeignKey("Escola_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Escola");
+                });
+
             modelBuilder.Entity("educapass_api.Models.ClaseModel", b =>
                 {
                     b.Navigation("Aluno");
@@ -182,6 +233,8 @@ namespace educapass_api.Migrations
                     b.Navigation("Aluno");
 
                     b.Navigation("Clase");
+
+                    b.Navigation("Professor");
                 });
 #pragma warning restore 612, 618
         }

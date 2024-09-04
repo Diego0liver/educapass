@@ -1,5 +1,23 @@
 name: dockercompose4469552575160079979
 services:
+  dbeducapass:
+    container_name: db_educapass
+    environment:
+      POSTGRES_PASSWORD: root
+    image: postgres
+    networks:
+      educapassnet: null
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5432"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: pg
+        target: /var/lib/postgresql/data
+        volume: {}
   educapass-api:
     build:
       context: C:\Users\diego\Documents\projetos\educapass\servidor\educapass-api
@@ -10,8 +28,11 @@ services:
       labels:
         com.microsoft.created-by: visual-studio
         com.microsoft.visual-studio.project-name: educapass-api
-      target: base
-    container_name: educapass-api
+    container_name: educapass-api_1
+    depends_on:
+      dbeducapass:
+        condition: service_started
+        required: true
     entrypoint:
       - dotnet
       - --roll-forward
@@ -22,18 +43,20 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: "8080"
       ASPNETCORE_HTTPS_PORTS: "8081"
-      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
-      DOTNET_USE_POLLING_FILE_WATCHER: "1"
-      NUGET_FALLBACK_PACKAGES: ""
-    image: educapassapi:dev
+    image: educapassapi
     labels:
-      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /.nuget/packages  "/app/bin/Debug/net8.0/educapass-api.dll"'
+      com.microsoft.visual-studio.project-name: educapass-api
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /.nuget/packages  "/app/educapass-api.dll"'
       com.microsoft.visualstudio.debuggee.killprogram: dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet
       com.microsoft.visualstudio.debuggee.program: dotnet
       com.microsoft.visualstudio.debuggee.workingdirectory: /app
     networks:
-      default: null
+      educapassnet: null
     ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
       - mode: ingress
         target: 8080
         protocol: tcp
@@ -55,24 +78,8 @@ services:
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\diego\Documents\projetos\educapass\servidor\educapass-api\educapass-api
-        target: /app
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\diego\Documents\projetos\educapass\servidor\educapass-api
-        target: /src
-        bind:
-          create_host_path: true
-      - type: bind
         source: C:\Users\diego\vsdbg\vs2017u5
         target: /remote_debugger
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\diego\.nuget\packages
-        target: /.nuget/packages
-        read_only: true
         bind:
           create_host_path: true
       - type: bind
@@ -100,5 +107,10 @@ services:
         bind:
           create_host_path: true
 networks:
-  default:
-    name: dockercompose4469552575160079979_default
+  educapassnet:
+    name: dockercompose4469552575160079979_educapassnet
+    driver: bridge
+volumes:
+  pg:
+    name: dockercompose4469552575160079979_pg
+    driver: local

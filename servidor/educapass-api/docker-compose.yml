@@ -10,7 +10,9 @@ services:
         - dbeducapass
     networks:
         - educapassnet
-  
+    ports:
+      - "8080:8080"
+
   dbeducapass:
     image: postgres
     container_name: db_educapass
