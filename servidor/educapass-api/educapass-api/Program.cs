@@ -22,6 +22,9 @@ builder.Services.AddTransient<IClaseRepository, ClaseRepository>();
 builder.Services.AddTransient<IAlunoRepository, AlunoRepository>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IProfessorRepository, ProfessorRepository>();
+builder.Services.AddTransient<IMateriaRepository, MateriaRepository>();
+builder.Services.AddTransient<IClasseProfessorRepository, ClasseProfessorRepository>();
+builder.Services.AddTransient<IProfessorMateriaRepository, ProfessorMateriaRepository>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

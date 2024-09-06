@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace educapass_api.Models
 {
-    public class ClaseModel
+    public class MateriaModel
     {
         [Key]
         public int Id { get; set; }
@@ -13,8 +13,6 @@ namespace educapass_api.Models
         [JsonIgnore]
         public EscolaModel? Escola { get; set; }
         [JsonIgnore]
-        public ICollection<AlunoModel>? Aluno { get; set; }
-        [JsonIgnore]
-        public ICollection<ClasseProfessorModel>? ClasseProfessor { get; set; }
+        public ICollection<ProfessorMateriaModel>? ProfessorMateria { get; set; }
     }
 }

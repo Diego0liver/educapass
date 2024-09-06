@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using educapass_api.Db;
@@ -11,9 +12,11 @@ using educapass_api.Db;
 namespace educapass_api.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    partial class BancoContextModelSnapshot : ModelSnapshot
+    [Migration("20240905141148_Materia")]
+    partial class Materia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,29 +110,6 @@ namespace educapass_api.Migrations
                     b.ToTable("Clase");
                 });
 
-            modelBuilder.Entity("educapass_api.Models.ClasseProfessorModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Clase_id")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Professor_id")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Clase_id");
-
-                    b.HasIndex("Professor_id");
-
-                    b.ToTable("ClasseProfessor");
-                });
-
             modelBuilder.Entity("educapass_api.Models.EscolaModel", b =>
                 {
                     b.Property<int>("Id")
@@ -190,29 +170,6 @@ namespace educapass_api.Migrations
                     b.HasIndex("Escola_id");
 
                     b.ToTable("Materia");
-                });
-
-            modelBuilder.Entity("educapass_api.Models.ProfessorMateriaModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Materia_id")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Professor_id")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Materia_id");
-
-                    b.HasIndex("Professor_id");
-
-                    b.ToTable("ProfessorMateria");
                 });
 
             modelBuilder.Entity("educapass_api.Models.ProfessorModel", b =>
@@ -283,25 +240,6 @@ namespace educapass_api.Migrations
                     b.Navigation("Escola");
                 });
 
-            modelBuilder.Entity("educapass_api.Models.ClasseProfessorModel", b =>
-                {
-                    b.HasOne("educapass_api.Models.ClaseModel", "Clase")
-                        .WithMany("ClasseProfessor")
-                        .HasForeignKey("Clase_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("educapass_api.Models.ProfessorModel", "Professor")
-                        .WithMany("ClasseProfessor")
-                        .HasForeignKey("Professor_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Clase");
-
-                    b.Navigation("Professor");
-                });
-
             modelBuilder.Entity("educapass_api.Models.MateriaModel", b =>
                 {
                     b.HasOne("educapass_api.Models.EscolaModel", "Escola")
@@ -311,25 +249,6 @@ namespace educapass_api.Migrations
                         .IsRequired();
 
                     b.Navigation("Escola");
-                });
-
-            modelBuilder.Entity("educapass_api.Models.ProfessorMateriaModel", b =>
-                {
-                    b.HasOne("educapass_api.Models.MateriaModel", "Materia")
-                        .WithMany("ProfessorMateria")
-                        .HasForeignKey("Materia_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("educapass_api.Models.ProfessorModel", "Professor")
-                        .WithMany("ProfessorMateria")
-                        .HasForeignKey("Professor_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Materia");
-
-                    b.Navigation("Professor");
                 });
 
             modelBuilder.Entity("educapass_api.Models.ProfessorModel", b =>
@@ -346,8 +265,6 @@ namespace educapass_api.Migrations
             modelBuilder.Entity("educapass_api.Models.ClaseModel", b =>
                 {
                     b.Navigation("Aluno");
-
-                    b.Navigation("ClasseProfessor");
                 });
 
             modelBuilder.Entity("educapass_api.Models.EscolaModel", b =>
@@ -359,18 +276,6 @@ namespace educapass_api.Migrations
                     b.Navigation("Materia");
 
                     b.Navigation("Professor");
-                });
-
-            modelBuilder.Entity("educapass_api.Models.MateriaModel", b =>
-                {
-                    b.Navigation("ProfessorMateria");
-                });
-
-            modelBuilder.Entity("educapass_api.Models.ProfessorModel", b =>
-                {
-                    b.Navigation("ClasseProfessor");
-
-                    b.Navigation("ProfessorMateria");
                 });
 #pragma warning restore 612, 618
         }

@@ -51,7 +51,7 @@ namespace educapass_api.Controllers
             return Ok(professoresAll);
         }
 
-        [Authorize]
+        
         [HttpGet("{id}")]
         public IActionResult ProfessorById(int id)
         {
@@ -61,6 +61,17 @@ namespace educapass_api.Controllers
                 return Ok(new { message = "Professor econtrada.", res });
             }
             return StatusCode(500, new { message = "Professor nao encontrada" });
+        }
+        [Authorize]
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProfessor(int id)
+        {
+            bool res = _professorRepository.Deletar(id);
+            if (!res)
+            {
+                return NotFound(new { message = "Professor não encontrada." });
+            }
+            return Ok(new { message = "Professor deletada com sucesso.", res });
         }
     }
 }

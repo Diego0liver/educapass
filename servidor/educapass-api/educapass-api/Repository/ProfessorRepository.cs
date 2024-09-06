@@ -36,9 +36,16 @@ namespace educapass_api.Repository
             {
                 return false;
             }
-            _bancoContext.Professor.Remove(deletarProfessor);
-            _bancoContext.SaveChanges();
-            return true;
+            try
+            {
+                _bancoContext.Professor.Remove(deletarProfessor);
+                _bancoContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

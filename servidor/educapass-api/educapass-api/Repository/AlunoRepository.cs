@@ -35,9 +35,16 @@ namespace educapass_api.Repository
             {
                 return false;
             }
-            _bancoContext.Aluno.Remove(deletarAluno);
-            _bancoContext.SaveChanges();
-            return true;
+            try
+            {
+                _bancoContext.Aluno.Remove(deletarAluno);
+                _bancoContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
     }

@@ -2,6 +2,13 @@
   <LayoutEscola>
     <v-data-table :headers="headers" :items="dados">
       <template v-slot:top>
+        <v-alert v-if="alertDelet"
+            :text='alertDelet'
+            type="success"
+            class="mb-2"
+            variant="tonal"
+            closable
+          ></v-alert>
         <v-toolbar flat>
           <v-toolbar-title>
               Professores <v-icon aria-hidden="false">mdi-human-male-board</v-icon>
@@ -17,7 +24,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancelar</v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm">Excluir</v-btn>
+                <v-btn color="red-lighten-1" variant="text" @click="deleteItemConfirm">Excluir</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -28,7 +35,7 @@
         <v-icon
           class="me-2"
           size="small"
-          @click="editItem(item)"
+          @click="detalheProfessor(item.id)"
         >
           mdi-eye
         </v-icon>
@@ -38,21 +45,6 @@
           @click="deleteItem(item)"
         >
           mdi-delete
-        </v-icon>
-      </template>
-      <template v-slot:item.vinculos>
-        <v-icon
-          class="me-2"
-          size="small"
-          @click="deleteItem(item)"
-        >
-          mdi-door-open
-        </v-icon>
-        <v-icon
-          size="small"
-          @click="deleteItem(item)"
-        >
-          mdi-book-plus
         </v-icon>
       </template>
       <template v-slot:no-data>
@@ -85,7 +77,6 @@
         { title: 'CPF', key: 'cpf' },
         { title: 'E-mail', key: 'email' },
         { title: 'Opcoes', key: 'actions', sortable: false },
-        { title: 'Vinculos', key: 'vinculos', sortable: false }
       ],
       dados: [],
       editedIndex: -1,
@@ -94,13 +85,14 @@
         inscricao: 0,
         cpf: '',
         email: '',
+        alertDelet: ''
       },
       defaultItem: {
         nome: '',
         inscricao: 0,
         cpf: '',
         email: '',
-        
+        alertDelet: ''
       },
     }),
 
@@ -133,8 +125,8 @@
           console.log(this.token)
         });
       },
-      detalheAluno(id) {
-        this.$router.push({ name: 'DetalhesAluno', params: { id } });
+      detalheProfessor(id) {
+        this.$router.push({ name: 'DetalhesProfessor', params: { id } });
       },
 
       deleteItem (item) {
@@ -144,8 +136,19 @@
       },
 
       deleteItemConfirm () {
-        this.dados.splice(this.editedIndex, 1)
-        this.closeDelete()
+        axios.delete(`professor/${this.editedItem.id}`)
+        .then(() => {
+          const index = this.dados.findIndex(d => d.id === this.editedItem.id)
+          if (index !== -1) {
+            this.dados.splice(index, 1)
+          }
+          console.log("Professor deletada com sucesso");
+          this.alertDelet = "Professor deletada com sucesso";
+          this.closeDelete()
+        })
+        .catch(error => {
+          console.error("Erro ao deletar o item:", error);
+        });
       },
 
       closeDelete () {

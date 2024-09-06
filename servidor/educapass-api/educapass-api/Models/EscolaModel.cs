@@ -21,6 +21,8 @@ namespace educapass_api.Models
         public ICollection<AlunoModel>? Aluno { get; set; }
         [JsonIgnore]
         public ICollection<ProfessorModel>? Professor { get; set; }
+        [JsonIgnore]
+        public ICollection<MateriaModel>? Materia { get; set; }
         public bool SenhaValida(string senha)
         {
             return Senha == senha;

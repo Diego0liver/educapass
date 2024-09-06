@@ -14,6 +14,8 @@ import NovoAluno from '@/pages/escola/aluno/NovoAluno.vue';
 import DetalhesAluno from '@/pages/escola/aluno/DetalhesAluno.vue';
 import NotFound from '@/pages/NotFound.vue';
 import NovoProfessor from '@/pages/escola/professor/NovoProfessor.vue';
+import DetalhesProfessor from '@/pages/escola/professor/DetalhesProfessor.vue';
+import NovaMateria from '@/pages/escola/materia/NovaMateria.vue';
 
 const routes = [
   {
@@ -65,6 +67,12 @@ const routes = [
     beforeEnter: Auth.authEscola
   },
   {
+    path: '/escola/novaMateria',
+    name: 'NovaMateria',
+    component: NovaMateria,
+    beforeEnter: Auth.authEscola
+  },
+  {
     path: '/escola/novoAluno',
     name: 'NovoAluno',
     component: NovoAluno,
@@ -82,6 +90,13 @@ const routes = [
     name: 'NovoProfessor',
     component: NovoProfessor,
     beforeEnter: Auth.authEscola
+  },
+  {
+    path: '/escola/detalhesProfessor/:id',
+    name: 'DetalhesProfessor',
+    component: DetalhesProfessor,
+    beforeEnter: Auth.authEscola,
+    props: true
   },
   {
     path: '/:pathMatch(.*)*',

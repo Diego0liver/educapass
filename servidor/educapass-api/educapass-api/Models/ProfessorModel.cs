@@ -16,5 +16,9 @@ namespace educapass_api.Models
         public int Escola_id { get; set; }
         [JsonIgnore]
         public EscolaModel? Escola { get; set; }
+        [JsonIgnore]
+        public ICollection<ClasseProfessorModel>? ClasseProfessor { get; set; }
+        [JsonIgnore]
+        public ICollection<ProfessorMateriaModel>? ProfessorMateria { get; set; }
     }
 }

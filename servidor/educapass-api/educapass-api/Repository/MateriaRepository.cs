@@ -4,40 +4,40 @@ using educapass_api.Models;
 
 namespace educapass_api.Repository
 {
-    public class ClaseRepository : IClaseRepository
+    public class MateriaRepository : IMateriaRepository
     {
         private readonly BancoContext _bancoContext;
-        public ClaseRepository(BancoContext bancoContext)
+        public MateriaRepository(BancoContext bancoContext)
         {
             _bancoContext = bancoContext;
         }
-        public ClaseModel Adicionar(ClaseModel clase)
+        public MateriaModel Adicionar(MateriaModel materia)
         {
-            _bancoContext.Clase.Add(clase);
+            _bancoContext.Materia.Add(materia);
             _bancoContext.SaveChanges();
-            return clase;
+            return materia;
         }
 
-        public ClaseModel ClaseById(int id)
+        public List<MateriaModel> GetMaterias(int userId)
         {
-            return _bancoContext.Clase.FirstOrDefault(x => x.Id == id);
+            return _bancoContext.Materia.Where(a => a.Escola_id == userId).ToList();
         }
 
-        public List<ClaseModel> GetClases(int userId)
+        public MateriaModel MateriaById(int id)
         {
-            return _bancoContext.Clase.Where(a => a.Escola_id == userId).ToList();
+            return _bancoContext.Materia.FirstOrDefault(x => x.Id == id);
         }
 
         public bool Deletar(int id)
         {
-            ClaseModel deletarClase = ClaseById(id);
-            if (deletarClase == null)
+            MateriaModel deletarMateria = MateriaById(id);
+            if (deletarMateria == null)
             {
                 return false;
             }
             try
             {
-                _bancoContext.Clase.Remove(deletarClase);
+                _bancoContext.Materia.Remove(deletarMateria);
                 _bancoContext.SaveChanges();
                 return true;
             }

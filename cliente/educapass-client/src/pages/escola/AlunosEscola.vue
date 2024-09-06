@@ -2,6 +2,13 @@
   <LayoutEscola>
     <v-data-table :headers="headers" :items="dados">
       <template v-slot:top>
+        <v-alert v-if="alertDelet"
+            :text='alertDelet'
+            type="success"
+            class="mb-2"
+            variant="tonal"
+            closable
+          ></v-alert>
         <v-toolbar flat>
           <v-toolbar-title>
               Alunos <v-icon aria-hidden="false">mdi-account-school</v-icon>
@@ -21,7 +28,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancelar</v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm">Excluir</v-btn>
+                <v-btn color="red-lighten-1" variant="text" @click="deleteItemConfirm">Excluir</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -80,7 +87,8 @@
         inscricao: 0,
         turma: '',
         numeroChamada: 0,
-        token: ''
+        token: '',
+        alertDelet: ''
       },
     }),
 
@@ -121,8 +129,19 @@
       },
 
       deleteItemConfirm () {
-        this.dados.splice(this.editedIndex, 1)
-        this.closeDelete()
+        axios.delete(`alunos/${this.editedItem.id}`)
+        .then(() => {
+          const index = this.dados.findIndex(d => d.id === this.editedItem.id)
+          if (index !== -1) {
+            this.dados.splice(index, 1)
+          }
+          console.log("Aluno deletada com sucesso");
+          this.alertDelet = "Aluno deletada com sucesso";
+          this.closeDelete()
+        })
+        .catch(error => {
+          console.error("Erro ao deletar o item:", error);
+        });
       },
 
       closeDelete () {

@@ -2,6 +2,21 @@
   <LayoutEscola>
     <v-data-table :headers="headers" :items="dados">
       <template v-slot:top>
+        <v-alert v-if="$route.query.mensagem"
+          :text="$route.query.mensagem"
+          type="success"
+          class="mb-2"
+          variant="tonal"
+          closable
+        >
+        </v-alert>
+        <v-alert v-if="alertDelet"
+            :text='alertDelet'
+            type="success"
+            class="mb-2"
+            variant="tonal"
+            closable
+          ></v-alert>
         <v-toolbar flat>
           <v-toolbar-title>
             Salas de aula <v-icon aria-hidden="false">mdi-door-closed</v-icon>
@@ -21,7 +36,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancelar</v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm">Deletar</v-btn>
+                <v-btn color="red-lighten-1" variant="text" @click="deleteItemConfirm">Deletar</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -72,7 +87,8 @@
       defaultItem: {
         nome: '',
         descricao: '',
-        id: ''
+        id: '',
+        alertDelet: ''
       },
       nomeItem: ''
     }),
@@ -96,7 +112,6 @@
         .catch(error => {
           console.error("Erro ao buscar os dados:", error);
         });
-        
       },
 
     deleteItem (item) {
@@ -108,17 +123,18 @@
 
     deleteItemConfirm () {
       axios.delete(`clases/${this.editedItem.id}`)
-          .then(() => {
-            const index = this.dados.findIndex(d => d.id === this.editedItem.id)
-            if (index !== -1) {
-              this.dados.splice(index, 1)
-            }
-            console.log("Sala deletada com sucesso");
-            this.closeDelete()
-          })
-          .catch(error => {
-            console.error("Erro ao deletar o item:", error);
-          });
+        .then(() => {
+          const index = this.dados.findIndex(d => d.id === this.editedItem.id)
+          if (index !== -1) {
+            this.dados.splice(index, 1)
+          }
+          console.log("Sala deletada com sucesso");
+          this.alertDelet = "Sala deletada com sucesso";
+          this.closeDelete()
+        })
+        .catch(error => {
+          console.error("Erro ao deletar o item:", error);
+        });
     },
 
     closeDelete () {

@@ -113,8 +113,6 @@
                     this.$router.push('/escola/novoProfessor');
                 });
             },
-            
-        
         }
     }
 </script>      
